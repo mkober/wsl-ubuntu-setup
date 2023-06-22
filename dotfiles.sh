@@ -10,6 +10,8 @@ rm -rf ~/.config/doom
 ln -s ~/repos/dotfiles/.config/doom ~/.config/doom
 ln -s ~/repos/dotfiles/.config/nvim ~/.config/nvim
 
+ln -s ~/repos/dotfiles/.themes ~/.themes
+
 fc-cache -f -v
 
 ~/.config/emacs/bin/doom sync
