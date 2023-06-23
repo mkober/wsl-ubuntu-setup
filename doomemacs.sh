@@ -12,8 +12,8 @@ make -j8
 sudo make install
 
 cd ~/
-mv emacs-28.2 trash
-mv emacs-28.2.tar.gz trash
+mv emacs-29.0.92 trash
+mv emacs-29.0.92.tar.gz trash
 
 cd ~/
 rm -rf ~/.config/emacs
