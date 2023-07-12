@@ -7,6 +7,9 @@ sudo apt install -y ansible libfuse2 git git-lfs gh vim tmux gnome-tweaks build-
 
 mkdir ~/repos
 mkdir ~/trash
+mkdir ~/.ansible
+
+touch ~/.ansible/pass.txt
 
 ./git.sh
 ./node.sh
