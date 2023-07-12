@@ -12,5 +12,5 @@ wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-lin
 unzip aws-sam-cli-linux-x86_64.zip -d aws-sam
 sudo ./aws-sam/install
 
-mv aws-sam-tli-linux-x86_64.zip trash
+mv aws-sam-cli-linux-x86_64.zip trash
 mv aws-sam trash
