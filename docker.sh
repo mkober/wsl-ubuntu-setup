@@ -1,16 +1,15 @@
 #!/bin/bash
 #
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
-
-echo \
-  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+cd ~
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
 
 sudo usermod -aG docker $USER
 
+# Using Ubuntu 22.04 or Debian 10+? You need to do 1 extra step for iptables
+# compatibility, you'll want to choose option (1) to use iptables-legacy from
+# the prompt that'll come up when running the command below.
+#
+# You'll likely need to reboot Windows or at least restart WSL after applying
+# this, otherwise networking inside of your containers won't work.
+sudo update-alternatives --config iptables
