@@ -1,15 +1,25 @@
 #!/bin/bash
 #
-cd ~
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
 
-sudo usermod -aG docker $USER
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-# Using Ubuntu 22.04 or Debian 10+? You need to do 1 extra step for iptables
-# compatibility, you'll want to choose option (1) to use iptables-legacy from
-# the prompt that'll come up when running the command below.
-#
-# You'll likely need to reboot Windows or at least restart WSL after applying
-# this, otherwise networking inside of your containers won't work.
-sudo update-alternatives --config iptables
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Post install to setup docker user/group to run docker without sudo
+# Breaks install when group exists
+#sudo groupadd docker
+#sudo usermod -aG docker $USER
+#newgrp docker
